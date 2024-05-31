@@ -6,10 +6,13 @@ import big.company.app.service.CompanyStructureAnalyzer;
 import big.company.app.strategy.EmployeeAnalysisStrategy;
 
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DefaultCompanyStructureAnalyzer implements CompanyStructureAnalyzer {
     private final EmployeeAnalysisStrategy reportingLineEmployeeAnalysisStrategy;
     private final EmployeeAnalysisStrategy salaryEmployeeAnalysisStrategy;
+    private final Logger log = Logger.getLogger(this.getClass().getName());
 
     public DefaultCompanyStructureAnalyzer(EmployeeAnalysisStrategy reportingLineEmployeeAnalysisStrategy,
                                            EmployeeAnalysisStrategy salaryEmployeeAnalysisStrategy) {
@@ -19,8 +22,10 @@ public class DefaultCompanyStructureAnalyzer implements CompanyStructureAnalyzer
 
     @Override
     public CompanyReport analyzeStructure(Map<String, Employee> employeeMap) {
+        log.log(Level.CONFIG, "creating company report");
         CompanyReport companyReport = new CompanyReport();
         if (employeeMap == null) {
+            log.log(Level.CONFIG, "employeeMap is empty");
             return companyReport;
         }
 
@@ -39,6 +44,7 @@ public class DefaultCompanyStructureAnalyzer implements CompanyStructureAnalyzer
 
         });
 
+        log.log(Level.CONFIG, "company report is created");
         return companyReport;
     }
 

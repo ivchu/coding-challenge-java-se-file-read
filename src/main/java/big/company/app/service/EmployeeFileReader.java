@@ -1,6 +1,7 @@
 package big.company.app.service;
 
 import big.company.app.dto.Employee;
+import big.company.app.exception.FileIOException;
 
 import java.util.Map;
 
@@ -16,5 +17,5 @@ public interface EmployeeFileReader {
      * @param filePath The path of the file to be read.
      * @return A {@code Map} of employee Ids to their respective {@link Employee} objects.
      */
-    Map<String, Employee> readEmployeesFile(String filePath);
+    Map<String, Employee> readEmployeesFile(String filePath) throws FileIOException;
 }

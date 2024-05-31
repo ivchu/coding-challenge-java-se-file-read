@@ -8,10 +8,13 @@ import big.company.app.strategy.EmployeeAnalysisStrategy;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ReportingLineEmployeeAnalysisStrategy implements EmployeeAnalysisStrategy {
     public static final int MAXIMUM_MANAGERS_TO_CEO = 4;
     private final DefaultEmployeeReportFactory employeeReportFactory;
+    private final Logger log = Logger.getLogger(this.getClass().getName());
 
     public ReportingLineEmployeeAnalysisStrategy(DefaultEmployeeReportFactory employeeReportFactory) {
         this.employeeReportFactory = employeeReportFactory;
@@ -20,7 +23,7 @@ public class ReportingLineEmployeeAnalysisStrategy implements EmployeeAnalysisSt
     @Override
     public Optional<EmployeeReport> analyzeEmployee(Employee employee, Map<String, Employee> employeeMap) {
         if (employee == null || employeeMap == null) {
-            // TODO add logs
+            log.log(Level.CONFIG, "missing parameters for analyze method");
             return Optional.empty();
         }
         int levels = 0;
@@ -30,6 +33,7 @@ public class ReportingLineEmployeeAnalysisStrategy implements EmployeeAnalysisSt
         while (managerId != null) {
             if (visitedManagers.contains(managerId)) {
                 levels = -1;
+                log.log(Level.CONFIG, "company structure has loops in structure for employee " + employee.getId());
                 break;
             }
             visitedManagers.add(managerId);

@@ -10,8 +10,11 @@ import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SalaryEmployeeAnalysisStrategy implements EmployeeAnalysisStrategy {
+    private final Logger log = Logger.getLogger(this.getClass().getName());
     private final DefaultEmployeeReportFactory employeeReportFactory;
     private record AverageAndDifference(BigDecimal average, BigDecimal difference) {}
 
@@ -22,11 +25,12 @@ public class SalaryEmployeeAnalysisStrategy implements EmployeeAnalysisStrategy 
     @Override
     public Optional<EmployeeReport> analyzeEmployee(Employee employee, Map<String, Employee> employeeMap) {
         if (employee == null || employeeMap == null) {
-            // TODO add logs
+            log.log(Level.CONFIG, "missing parameters for analyze method");
             return Optional.empty();
         }
         List<Employee> subordinates = employee.getSubordinates();
         if (subordinates.isEmpty()) {
+            log.log(Level.CONFIG, "Empty subordinates for salary comparison logic, employee: " + employee.getId());
             return Optional.empty();
         }
 
@@ -47,7 +51,6 @@ public class SalaryEmployeeAnalysisStrategy implements EmployeeAnalysisStrategy 
     }
 
     private AverageAndDifference calculateAverageAndDifference(Employee employee, List<Employee> subordinates) {
-        // TODO is accuracy is good enough?
         BigDecimal average = subordinates.stream()
                 .map(Employee::getSalary)
                 .map(BigDecimal::valueOf)

@@ -1,7 +1,8 @@
 package big.company.app.service.impl;
 
 import big.company.app.dto.Employee;
-import big.company.app.exception.FileReadException;
+import big.company.app.exception.FileIOException;
+import big.company.app.exception.LineReadException;
 import big.company.app.service.EmployeeFileReader;
 
 import java.io.IOException;
@@ -11,45 +12,50 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CsvEmployeeFileReader implements EmployeeFileReader {
     public static final int FIRST_LINE = 1;
-    public static final String COMMA_SPLITERATOR = ",";
+    public static final String COMMA_DELIMITER = ",";
     public static final int LINE_WITHOUT_MANAGER_ID_SIZE = 4;
+    private final Logger log = Logger.getLogger(this.getClass().getName());
 
     @Override
     public Map<String, Employee> readEmployeesFile(String filePath) {
+        log.log(Level.CONFIG, "Reading employees file for filepath " + filePath);
         if (filePath == null || filePath.isEmpty() || filePath.isBlank()) {
+            log.log(Level.CONFIG, "filePath is missing, cannot read file");
             return new HashMap<>();
         }
 
         try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
-            // no requirements regarding lines order so in order to simplify, fist read all then create tree of employees
-            // can be optimized in order to iterate once
-            // split into private methods
-            // add some validations?
-
             Map<String, Employee> employeeMap = readEmployees(lines);
             populateSubordinates(employeeMap);
 
+            log.log(Level.CONFIG, "File read successfully for filepath " + filePath);
             return employeeMap;
         } catch (IOException e) {
-            // do smth nice, file can be used by name if ran is same folder
-            throw new FileReadException("cannot find file for given URL " + filePath + " please provide correct path to file", e);
+            log.log(Level.CONFIG, "Exception during reading a file for filepath " + filePath, e);
+            throw new FileIOException("Cannot find file for given URL " + filePath + " please provide correct path to file", e);
         }
     }
 
     private Map<String, Employee> readEmployees(Stream<String> lines) {
         return lines
                 .skip(FIRST_LINE)
-                .map(line -> Arrays.asList(line.split(COMMA_SPLITERATOR)))
+                .map(line -> Arrays.asList(line.split(COMMA_DELIMITER)))
                 .map(this::createEmployee)
                 .collect(Collectors.toMap(Employee::getId, employee -> employee));
     }
 
     private Employee createEmployee(List<String> lineList) {
+        if (lineList.size() < LINE_WITHOUT_MANAGER_ID_SIZE) {
+            log.log(Level.CONFIG, "csv line has incorrect format " + String.join(",", lineList));
+            throw new LineReadException("Line is missing info or line delimiter is wrong comma expected");
+        }
         if (lineList.size() == LINE_WITHOUT_MANAGER_ID_SIZE) {
             return new Employee(lineList.getFirst(), lineList.get(1), lineList.get(2), Integer.parseInt(lineList.get(3)));
         }
