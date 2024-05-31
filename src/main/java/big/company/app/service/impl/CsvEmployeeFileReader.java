@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,6 +21,9 @@ public class CsvEmployeeFileReader implements EmployeeFileReader {
 
     @Override
     public Map<String, Employee> readEmployeesFile(String filePath) {
+        if (filePath == null || filePath.isEmpty() || filePath.isBlank()) {
+            return new HashMap<>();
+        }
 
         try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
             // no requirements regarding lines order so in order to simplify, fist read all then create tree of employees
@@ -33,7 +37,7 @@ public class CsvEmployeeFileReader implements EmployeeFileReader {
             return employeeMap;
         } catch (IOException e) {
             // do smth nice, file can be used by name if ran is same folder
-            throw new FileReadException("cannot find file for given URL " + filePath + " please provide full path to file", e);
+            throw new FileReadException("cannot find file for given URL " + filePath + " please provide correct path to file", e);
         }
     }
 

@@ -5,13 +5,10 @@ import big.company.app.dto.EmployeeReport;
 import big.company.app.factory.EmployeeReportFactory;
 
 public class DefaultEmployeeReportFactory implements EmployeeReportFactory {
+
     @Override
-    public EmployeeReport createEmployeeReport(Employee employee, boolean isSalaryHigher, double average, int hierarchyLevel) {
-        EmployeeReport report = new EmployeeReport();
-        report.setEmployee(employee);
-        report.setSalaryHigher(isSalaryHigher);
-        report.setSubordinateMedianSalary(average);
-        report.setHierarchyLevel(hierarchyLevel);
-        return report;
+    public EmployeeReport createEmployeeReport(Employee employee, boolean salaryHigher, double average, int hierarchyLevel) {
+        return new EmployeeReport(employee, average, salaryHigher, hierarchyLevel);
     }
+
 }

@@ -4,27 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents an Employee within a company,
+ * including the employee's ID, name, salary, manager ID and subordinates.
+ */
 public class Employee {
-    // no specific reqs on size assume int is enough
-    private String id;
-    private String firstName;
-    private String lastName;
-    private int salary;
-    private String managerId;
-    private List<Employee> subordinates;
+    private final String id;
+    private final String firstName;
+    private final String lastName;
+    private final int salary;
+    private final String managerId;
+    private final List<Employee> subordinates;
 
-    public Employee() {
-        this.subordinates = new ArrayList<>();
-    }
-
+    /**
+     * Constructs an {@link Employee} instance without a manager.
+     * Initializes the list of subordinates as an empty list.
+     *
+     * @param id        the employee's id
+     * @param firstName the employee's first name
+     * @param lastName  the employee's last name
+     * @param salary    the employee's salary
+     */
     public Employee(String id, String firstName, String lastName, int salary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
+        this.managerId = null;
         this.subordinates = new ArrayList<>();
     }
 
+    /**
+     * Constructs an {@link Employee} instance with a manager.
+     * Initializes the list of subordinates as an empty list.
+     *
+     * @param id        the employee's id
+     * @param firstName the employee's first name
+     * @param lastName  the employee's last name
+     * @param salary    the employee's salary
+     * @param managerId the employee's manager's id
+     */
     public Employee(String id, String firstName, String lastName, int salary, String managerId) {
         this.id = id;
         this.firstName = firstName;
@@ -38,48 +57,25 @@ public class Employee {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public int getSalary() {
         return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
     }
 
     public String getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(String managerId) {
-        this.managerId = managerId;
-    }
-
     public List<Employee> getSubordinates() {
         return subordinates;
-    }
-
-    public void setSubordinates(List<Employee> subordinates) {
-        this.subordinates = subordinates;
     }
 
     @Override
@@ -87,7 +83,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(id, employee.id) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(salary, employee.salary) && Objects.equals(managerId, employee.managerId) && Objects.equals(subordinates, employee.subordinates);
+        return salary == employee.salary
+                && Objects.equals(id, employee.id)
+                && Objects.equals(firstName, employee.firstName)
+                && Objects.equals(lastName, employee.lastName)
+                && Objects.equals(managerId, employee.managerId)
+                && Objects.equals(subordinates, employee.subordinates);
     }
 
     @Override

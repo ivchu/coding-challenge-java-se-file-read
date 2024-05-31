@@ -20,7 +20,8 @@ public class CompanyHierarchyAnalyzer {
             new ReportingLineEmployeeAnalysisStrategy(new DefaultEmployeeReportFactory()),
             new SalaryEmployeeAnalysisStrategy(new DefaultEmployeeReportFactory())
     );
-    public static ConsoleEmployeeAnalysisResultPrinter consoleEmployeeAnalysisResultPrinter = new ConsoleEmployeeAnalysisResultPrinter();
+    public static ConsoleEmployeeAnalysisResultPrinter consoleEmployeeAnalysisResultPrinter =
+            new ConsoleEmployeeAnalysisResultPrinter();
 
     public static void main(String[] args) {
         // TODO check for arguments and print error if needed
@@ -30,8 +31,7 @@ public class CompanyHierarchyAnalyzer {
         String pathToFile = "/Users/Ivan_Chuvakhin/Documents/Study/big-company-app/src/test/testData/example.csv";
 
         Map<String, Employee> employeeMap = employeeFileReader.readEmployeesFile(pathToFile);
-//        employeeMap.forEach((key, value) -> System.out.println(value));
         CompanyReport companyReport = companyStructureAnalyzer.analyzeStructure(employeeMap);
-        consoleEmployeeAnalysisResultPrinter.printResult(companyReport);
+        consoleEmployeeAnalysisResultPrinter.printReportResult(companyReport);
     }
 }
