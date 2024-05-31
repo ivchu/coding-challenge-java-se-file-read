@@ -36,7 +36,7 @@ public class ConsoleEmployeeAnalysisResultPrinter implements EmployeeAnalysisRes
                 report.employee().getFirstName(),
                 report.employee().getLastName(),
                 report.employee().getId(),
-                Math.abs(report.employee().getSalary() - report.subordinateAverageSalary()),
+                Math.abs(report.employee().getSalary() - report.normalSalary()),
                 System.lineSeparator()));
         log.log(Level.CONFIG, "Higher Salary employeeReports are printed");
     }
@@ -51,7 +51,7 @@ public class ConsoleEmployeeAnalysisResultPrinter implements EmployeeAnalysisRes
                 report.employee().getFirstName(),
                 report.employee().getLastName(),
                 report.employee().getId(),
-                Math.abs(report.employee().getSalary() - report.subordinateAverageSalary()),
+                Math.abs(report.employee().getSalary() - report.normalSalary()),
                 System.lineSeparator()));
         log.log(Level.CONFIG, "Lower Salary employeeReports are printed");
     }

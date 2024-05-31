@@ -65,8 +65,8 @@ public class CompanyHierarchyAnalyzerTest {
         CompanyHierarchyAnalyzer.main(new String[]{"src/test/testData/validEmployees.csv"});
         String expectedOutput = """
                 2 managers earn less than they should
-                John Doe with id 1 earns less than required by 750.00
-                Jane Smith with id 2 earns less than required by 1250.00
+                John Doe with id 1 earns less than required by 1900.00
+                Jane Smith with id 2 earns less than required by 2600.00
                 0 managers earn more than they should
                 0 Employees have a reporting line which is too long
                 """;

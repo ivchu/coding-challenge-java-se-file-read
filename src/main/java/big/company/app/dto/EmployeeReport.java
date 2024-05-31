@@ -7,7 +7,7 @@ package big.company.app.dto;
  * and the number of extra reporting lines beyond what is considered optimal.
  */
 public record EmployeeReport(Employee employee,
-                             double subordinateAverageSalary,
+                             double normalSalary,
                              boolean salaryHigher,
                              int excessReportingLine) {
 }

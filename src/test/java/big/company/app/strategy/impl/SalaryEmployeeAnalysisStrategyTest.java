@@ -125,8 +125,25 @@ public class SalaryEmployeeAnalysisStrategyTest {
     }
 
     @Test
-    @DisplayName("Return Optional with report with correctly calculated average salary")
-    public void shouldReturnCorrectAverageSalary() {
+    @DisplayName("Return Optional with report with correctly calculated average salary if current lower then expected")
+    public void shouldReturnCorrectAverageSalaryForLowerSalary() {
+        Employee CEO = new Employee("0", "Carl", "Third", 100000);
+        Employee firstManager = new Employee("1", "Carl", "Third", 95000, "0");
+        Employee secondManager = new Employee("2", "Carl", "Third", 85000, "0");
+
+        CEO.getSubordinates().addAll(Arrays.asList(firstManager, secondManager));
+
+        Optional<EmployeeReport> employeeReport = salaryEmployeeAnalysisStrategy.analyzeEmployee(CEO, new HashMap<>());
+
+        Assertions.assertFalse(employeeReport.isEmpty());
+        EmployeeReport report = employeeReport.get();
+        Assertions.assertEquals(report.employee().getId(), "0");
+        Assertions.assertEquals(report.normalSalary(), 108000d);
+    }
+
+    @Test
+    @DisplayName("Return Optional with report with correctly calculated average salary if current higher than expected")
+    public void shouldReturnCorrectAverageSalaryForHigherSalary() {
         Employee CEO = new Employee("0", "Carl", "Third", 100000);
         Employee firstManager = new Employee("1", "Carl", "Third", 60000, "0");
         Employee secondManager = new Employee("2", "Carl", "Third", 70000, "0");
@@ -138,6 +155,6 @@ public class SalaryEmployeeAnalysisStrategyTest {
         Assertions.assertFalse(employeeReport.isEmpty());
         EmployeeReport report = employeeReport.get();
         Assertions.assertEquals(report.employee().getId(), "0");
-        Assertions.assertEquals(report.subordinateAverageSalary(), 65000d);
+        Assertions.assertEquals(report.normalSalary(), 97500d);
     }
 }

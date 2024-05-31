@@ -37,13 +37,15 @@ public class SalaryEmployeeAnalysisStrategy implements EmployeeAnalysisStrategy 
         AverageAndDifference averageAndDifference = calculateAverageAndDifference(employee, subordinates);
 
         if (averageAndDifference.difference().doubleValue() < 20) {
+            BigDecimal expectedSalary = averageAndDifference.average().multiply(new BigDecimal("1.2"));
             EmployeeReport report = employeeReportFactory
-                    .createEmployeeReport(employee, false, averageAndDifference.average().doubleValue(), 0);
+                    .createEmployeeReport(employee, false, expectedSalary.doubleValue(), 0);
             return Optional.of(report);
         }
         if (averageAndDifference.difference().doubleValue() > 50) {
+            BigDecimal expectedSalary = averageAndDifference.average().multiply(new BigDecimal("1.5"));
             EmployeeReport report = employeeReportFactory
-                    .createEmployeeReport(employee, true, averageAndDifference.average().doubleValue(), 0);
+                    .createEmployeeReport(employee, true, expectedSalary.doubleValue(), 0);
             return Optional.of(report);
         }
 

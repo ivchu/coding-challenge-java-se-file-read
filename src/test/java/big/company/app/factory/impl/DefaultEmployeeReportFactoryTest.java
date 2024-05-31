@@ -27,7 +27,7 @@ public class DefaultEmployeeReportFactoryTest {
 
         Assertions.assertEquals(employee, report.employee());
         Assertions.assertEquals(salaryHigher, report.salaryHigher());
-        Assertions.assertEquals(average, report.subordinateAverageSalary());
+        Assertions.assertEquals(average, report.normalSalary());
         Assertions.assertEquals(hierarchyLevel, report.excessReportingLine());
     }
 
