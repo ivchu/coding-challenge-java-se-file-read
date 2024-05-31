@@ -14,9 +14,11 @@ import big.company.app.strategy.impl.ReportingLineEmployeeAnalysisStrategy;
 import big.company.app.strategy.impl.SalaryEmployeeAnalysisStrategy;
 
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CompanyHierarchyAnalyzer {
+    private static final Logger log = Logger.getLogger("big.company.app.CompanyHierarchyAnalyzer");
     public static EmployeeFileReader employeeFileReader = new CsvEmployeeFileReader();
     public static CompanyStructureAnalyzer companyStructureAnalyzer = new DefaultCompanyStructureAnalyzer(
             new ReportingLineEmployeeAnalysisStrategy(new DefaultEmployeeReportFactory()),
@@ -24,26 +26,32 @@ public class CompanyHierarchyAnalyzer {
     );
     public static ConsoleEmployeeAnalysisResultPrinter consoleEmployeeAnalysisResultPrinter =
             new ConsoleEmployeeAnalysisResultPrinter();
-    private final Logger log = Logger.getLogger(this.getClass().getName());
 
     public static void main(String[] args) {
-        // TODO check for arguments and print error if needed
-        // TODO add test for this class
-        // TODO add readme and assumptions
-//        String pathToFile = args[0];
-//        System.out.println("Hello World! " + pathToFile);
-        String pathToFile = "/Users/Ivan_Chuvakhin/Documents/Study/big-company-app/src/test/testData/example.csv";
+        if (args.length != 1) {
+            System.out.println("Please provide argument for program, " +
+                    "it should contain full or relative path to csv file with employees");
+            log.log(Level.CONFIG, "program argument is missing");
+            return;
+        }
+        String pathToFile = args[0];
 
         try {
             Map<String, Employee> employeeMap = employeeFileReader.readEmployeesFile(pathToFile);
             CompanyReport companyReport = companyStructureAnalyzer.analyzeStructure(employeeMap);
             consoleEmployeeAnalysisResultPrinter.printReportResult(companyReport);
         } catch (FileIOException e) {
-            // message shit
+            System.out.println("Problems with file read, please recheck file name " +
+                    "and full or relative path to file, and try again");
+            log.log(Level.CONFIG, "file read failed, failed to read employee file", e);
         } catch (LineReadException e) {
-            // message shit
+            System.out.println("Problems with data format, please recheck file and make sure " +
+                    "that all employees have all required fields, and try again");
+            log.log(Level.CONFIG, "file read failed, problems during employee line read", e);
         } catch (NumberFormatException e) {
-            // message shit
+            System.out.println("Problems with data format, please recheck file and make sure " +
+                    "that all employees have all required fields and salary is an integer, and try again");
+            log.log(Level.CONFIG, "file read failed, not correct number format provided", e);
         }
 
     }

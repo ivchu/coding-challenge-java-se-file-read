@@ -39,7 +39,7 @@ public class CsvEmployeeFileReader implements EmployeeFileReader {
             return employeeMap;
         } catch (IOException e) {
             log.log(Level.CONFIG, "Exception during reading a file for filepath " + filePath, e);
-            throw new FileIOException("Cannot find file for given URL " + filePath + " please provide correct path to file", e);
+            throw new FileIOException("Cannot find file for given URL " + filePath, e);
         }
     }
 
