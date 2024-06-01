@@ -16,7 +16,7 @@ This project analyzes the organizational structure of "BIG COMPANY". The purpose
 - No employee should have more than 4 managers between them and the CEO.
 
 ### Assumptions
-Assumptions for given solution can be found in the next file ([Assumptions.md](Assumptions)).
+Assumptions for given solution can be found in the next file ([Assumptions.md](Assumptions.md)).
 <a name="requirements"></a>
 ## Requirements
 
