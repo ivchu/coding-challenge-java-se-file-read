@@ -38,7 +38,7 @@ public class DefaultCompanyStructureAnalyzerTest {
         CompanyReport companyReport = companyStructureAnalyzer.analyzeStructure(employeeMap);
 
         Assertions.assertEquals(companyReport.getHigherSalary().size(), 1);
-        Assertions.assertEquals(companyReport.getHigherSalary().getFirst().employee().getId(), "1");
+        Assertions.assertEquals(companyReport.getHigherSalary().getFirst().getEmployee().getId(), "1");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class DefaultCompanyStructureAnalyzerTest {
         CompanyReport companyReport = companyStructureAnalyzer.analyzeStructure(employeeMap);
 
         Assertions.assertEquals(companyReport.getLowerSalary().size(), 1);
-        Assertions.assertEquals(companyReport.getLowerSalary().getFirst().employee().getId(), "1");
+        Assertions.assertEquals(companyReport.getLowerSalary().getFirst().getEmployee().getId(), "1");
     }
 
     @Test
@@ -60,6 +60,6 @@ public class DefaultCompanyStructureAnalyzerTest {
         CompanyReport companyReport = companyStructureAnalyzer.analyzeStructure(employeeMap);
 
         Assertions.assertEquals(companyReport.getLongReportingLine().size(), 1);
-        Assertions.assertEquals(companyReport.getLongReportingLine().getFirst().employee().getId(), "1");
+        Assertions.assertEquals(companyReport.getLongReportingLine().getFirst().getEmployee().getId(), "1");
     }
 }

@@ -17,7 +17,7 @@ public class DefaultEmployeeReportFactoryTest {
 
     @Test
     @DisplayName("Return employee Report with provided fields")
-    public void testCreateEmployeeReport() {
+    public void testCreateGetEmployeeReport() {
         Employee employee = new Employee("1", "Test", "Employee", 1000, "0");
         boolean salaryHigher = false;
         double average = 200.0;
@@ -25,10 +25,10 @@ public class DefaultEmployeeReportFactoryTest {
 
         EmployeeReport report = defaultEmployeeReportFactory.createEmployeeReport(employee, salaryHigher, average, hierarchyLevel);
 
-        Assertions.assertEquals(employee, report.employee());
-        Assertions.assertEquals(salaryHigher, report.salaryHigher());
-        Assertions.assertEquals(average, report.normalSalary());
-        Assertions.assertEquals(hierarchyLevel, report.excessReportingLine());
+        Assertions.assertEquals(employee, report.getEmployee());
+        Assertions.assertEquals(salaryHigher, report.getSalaryHigher());
+        Assertions.assertEquals(average, report.getNormalSalary());
+        Assertions.assertEquals(hierarchyLevel, report.getExcessReportingLine());
     }
 
 }

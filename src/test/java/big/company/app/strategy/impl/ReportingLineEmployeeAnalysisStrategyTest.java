@@ -98,8 +98,8 @@ public class ReportingLineEmployeeAnalysisStrategyTest {
 
         Assertions.assertFalse(employeeReport.isEmpty());
         EmployeeReport report = employeeReport.get();
-        Assertions.assertEquals(report.excessReportingLine(), 1);
-        Assertions.assertEquals(report.employee().getId(), "5");
+        Assertions.assertEquals(report.getExcessReportingLine(), 1);
+        Assertions.assertEquals(report.getEmployee().getId(), "5");
     }
 
     @Test
@@ -115,7 +115,7 @@ public class ReportingLineEmployeeAnalysisStrategyTest {
 
         Assertions.assertFalse(employeeReport.isEmpty());
         EmployeeReport report = employeeReport.get();
-        Assertions.assertEquals(report.employee().getId(), "1");
-        Assertions.assertEquals(report.excessReportingLine(), -1);
+        Assertions.assertEquals(report.getEmployee().getId(), "1");
+        Assertions.assertEquals(report.getExcessReportingLine(), -1);
     }
 }

@@ -88,8 +88,8 @@ public class SalaryEmployeeAnalysisStrategyTest {
 
         Assertions.assertFalse(employeeReport.isEmpty());
         EmployeeReport report = employeeReport.get();
-        Assertions.assertEquals(report.employee().getId(), "0");
-        Assertions.assertFalse(report.salaryHigher());
+        Assertions.assertEquals(report.getEmployee().getId(), "0");
+        Assertions.assertFalse(report.getSalaryHigher());
     }
 
     @Test
@@ -120,8 +120,8 @@ public class SalaryEmployeeAnalysisStrategyTest {
 
         Assertions.assertFalse(employeeReport.isEmpty());
         EmployeeReport report = employeeReport.get();
-        Assertions.assertEquals(report.employee().getId(), "0");
-        Assertions.assertTrue(report.salaryHigher());
+        Assertions.assertEquals(report.getEmployee().getId(), "0");
+        Assertions.assertTrue(report.getSalaryHigher());
     }
 
     @Test
@@ -137,8 +137,8 @@ public class SalaryEmployeeAnalysisStrategyTest {
 
         Assertions.assertFalse(employeeReport.isEmpty());
         EmployeeReport report = employeeReport.get();
-        Assertions.assertEquals(report.employee().getId(), "0");
-        Assertions.assertEquals(report.normalSalary(), 108000d);
+        Assertions.assertEquals(report.getEmployee().getId(), "0");
+        Assertions.assertEquals(report.getNormalSalary(), 108000d);
     }
 
     @Test
@@ -154,7 +154,7 @@ public class SalaryEmployeeAnalysisStrategyTest {
 
         Assertions.assertFalse(employeeReport.isEmpty());
         EmployeeReport report = employeeReport.get();
-        Assertions.assertEquals(report.employee().getId(), "0");
-        Assertions.assertEquals(report.normalSalary(), 97500d);
+        Assertions.assertEquals(report.getEmployee().getId(), "0");
+        Assertions.assertEquals(report.getNormalSalary(), 97500d);
     }
 }
