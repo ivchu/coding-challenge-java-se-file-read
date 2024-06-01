@@ -15,6 +15,8 @@ This project analyzes the organizational structure of "BIG COMPANY". The purpose
 - Every manager earns at least 20% more than the average salary of their direct subordinates, but no more than 50% more.
 - No employee should have more than 4 managers between them and the CEO.
 
+### Assumptions
+Assumptions for given solution can be found in the next file ([Assumptions.md](Assumptions)).
 <a name="requirements"></a>
 ## Requirements
 
