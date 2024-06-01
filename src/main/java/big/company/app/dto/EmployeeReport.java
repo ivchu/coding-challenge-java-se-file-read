@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Represents a report of an Employee,
- * including the employee, the average salary of their subordinates,
+ * including the employee's details, the average salary of their subordinates,
  * a flag indicating whether their salary is higher than that average,
  * and the number of extra reporting lines beyond what is considered optimal.
  */
@@ -17,6 +17,17 @@ public final class EmployeeReport {
     private final boolean salaryHigher;
     private final int excessReportingLine;
 
+    /**
+     * Constructs a new employee report.
+     *
+     * @param employeeId The id of the employee.
+     * @param employeeFirstName The first name of the employee.
+     * @param employeeLastName The last name of the employee.
+     * @param employeeSalary The salary of the employee.
+     * @param normalSalary The average salary of subordinates.
+     * @param salaryHigher Flag indicating if the employee's salary is higher than the average.
+     * @param excessReportingLine Number of extra reporting lines beyond what is considered optimal.
+     */
     public EmployeeReport(String employeeId, String employeeFirstName, String employeeLastName, int employeeSalary,
                           double normalSalary, boolean salaryHigher, int excessReportingLine) {
         this.employeeId = employeeId;
