@@ -32,7 +32,7 @@ public class DefaultCompanyStructureAnalyzer implements CompanyStructureAnalyzer
         employeeMap.forEach((string, employee) -> {
             salaryEmployeeAnalysisStrategy.analyzeEmployee(employee, employeeMap)
                     .ifPresent(employeeReport -> {
-                        if (employeeReport.getSalaryHigher()) {
+                        if (employeeReport.isSalaryHigher()) {
                             companyReport.addHigherSalary(employeeReport);
                         } else {
                             companyReport.addLowerSalary(employeeReport);

@@ -30,7 +30,8 @@ public class ConsoleEmployeeAnalysisResultPrinterTest {
             "if higher salary employees report is not empty")
     public void shouldPrintHigherSalary() {
         Employee employee = new Employee("1", "John", "Doe", 10000, "0");
-        EmployeeReport employeeReport = new EmployeeReport(employee, 5000, true, 1);
+        EmployeeReport employeeReport = new EmployeeReport(employee.getId(), employee.getFirstName(),
+                employee.getLastName(), employee.getSalary(), 5000, true, 1);
 
         consoleEmployeeAnalysisResultPrinter.printHigherSalary(Collections.singletonList(employeeReport));
 
@@ -57,7 +58,8 @@ public class ConsoleEmployeeAnalysisResultPrinterTest {
     @DisplayName("Should print to console report with correct format if lower salary employees report is not empty")
     public void shouldPrintLowerSalary() {
         Employee employee = new Employee("1", "John", "Doe", 4000, "0");
-        EmployeeReport employeeReport = new EmployeeReport(employee, 5000, true, 1);
+        EmployeeReport employeeReport = new EmployeeReport(employee.getId(), employee.getFirstName(),
+                employee.getLastName(), employee.getSalary(), 5000, true, 1);
 
         consoleEmployeeAnalysisResultPrinter.printLowerSalary(Collections.singletonList(employeeReport));
 
@@ -84,7 +86,8 @@ public class ConsoleEmployeeAnalysisResultPrinterTest {
     @DisplayName("Should print to console report with correct format if long reporting line report is not empty")
     public void shouldPrintLongReportingLine() {
         Employee employee = new Employee("1", "John", "Doe", 4000, "0");
-        EmployeeReport employeeReport = new EmployeeReport(employee, 5000, true, 5);
+        EmployeeReport employeeReport = new EmployeeReport(employee.getId(), employee.getFirstName(),
+                employee.getLastName(), employee.getSalary(), 5000, true, 5);
 
         consoleEmployeeAnalysisResultPrinter.printLongReportingLine(Collections.singletonList(employeeReport));
 
@@ -101,7 +104,8 @@ public class ConsoleEmployeeAnalysisResultPrinterTest {
             "if long reporting line contains circular dependency is not empty")
     public void shouldPrintBrokenManagerHierarchy() {
         Employee employee = new Employee("1", "John", "Doe", 4000, "0");
-        EmployeeReport employeeReport = new EmployeeReport(employee, 5000, true, -1);
+        EmployeeReport employeeReport = new EmployeeReport(employee.getId(), employee.getFirstName(),
+                employee.getLastName(), employee.getSalary(), 5000, true, -1);
 
         consoleEmployeeAnalysisResultPrinter.printLongReportingLine(Collections.singletonList(employeeReport));
 
@@ -130,9 +134,12 @@ public class ConsoleEmployeeAnalysisResultPrinterTest {
         Employee employee1 = new Employee("1", "John", "Doe", 4000, "0");
         Employee employee2 = new Employee("2", "Jane", "Doe", 10000, "0");
 
-        EmployeeReport lowerSalaryReport = new EmployeeReport(employee1, 5000, false, 1);
-        EmployeeReport higherSalaryReport = new EmployeeReport(employee2, 5000, true, 2);
-        EmployeeReport longLineReport = new EmployeeReport(employee1, 5000, true, 5);
+        EmployeeReport lowerSalaryReport = new EmployeeReport(employee1.getId(), employee1.getFirstName(),
+                employee1.getLastName(), employee1.getSalary(),5000, false, 1);
+        EmployeeReport higherSalaryReport = new EmployeeReport(employee2.getId(), employee2.getFirstName(),
+                employee2.getLastName(), employee2.getSalary(), 5000, true, 2);
+        EmployeeReport longLineReport = new EmployeeReport(employee1.getId(), employee1.getFirstName(),
+                employee1.getLastName(), employee1.getSalary(), 5000, true, 5);
 
         CompanyReport companyReport = new CompanyReport();
         companyReport.getLowerSalary().add(lowerSalaryReport);

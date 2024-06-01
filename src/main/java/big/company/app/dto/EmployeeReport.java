@@ -9,38 +9,46 @@ import java.util.Objects;
  * and the number of extra reporting lines beyond what is considered optimal.
  */
 public final class EmployeeReport {
-    private final Employee employee;
+    private final String employeeId;
+    private final String employeeFirstName;
+    private final String employeeLastName;
+    private final int employeeSalary;
     private final double normalSalary;
     private final boolean salaryHigher;
     private final int excessReportingLine;
 
-    /**
-     * Constructs a new EmployeeReport with specified details.
-     *
-     * @param employee            the employee this report is about.
-     * @param normalSalary        the standard salary the employee should have according to company policy.
-     * @param salaryHigher        boolean flag indicating if the employee's salary is higher than the normal salary.
-     * @param excessReportingLine the number of reporting lines higher than the acceptable limit for the employee.
-     */
-    public EmployeeReport(Employee employee,
-                          double normalSalary,
-                          boolean salaryHigher,
-                          int excessReportingLine) {
-        this.employee = employee;
+    public EmployeeReport(String employeeId, String employeeFirstName, String employeeLastName, int employeeSalary,
+                          double normalSalary, boolean salaryHigher, int excessReportingLine) {
+        this.employeeId = employeeId;
+        this.employeeFirstName = employeeFirstName;
+        this.employeeLastName = employeeLastName;
+        this.employeeSalary = employeeSalary;
         this.normalSalary = normalSalary;
         this.salaryHigher = salaryHigher;
         this.excessReportingLine = excessReportingLine;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getEmployeeFirstName() {
+        return employeeFirstName;
+    }
+
+    public String getEmployeeLastName() {
+        return employeeLastName;
+    }
+
+    public int getEmployeeSalary() {
+        return employeeSalary;
     }
 
     public double getNormalSalary() {
         return normalSalary;
     }
 
-    public boolean getSalaryHigher() {
+    public boolean isSalaryHigher() {
         return salaryHigher;
     }
 
@@ -49,28 +57,28 @@ public final class EmployeeReport {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (EmployeeReport) obj;
-        return Objects.equals(this.employee, that.employee) &&
-                Double.doubleToLongBits(this.normalSalary) == Double.doubleToLongBits(that.normalSalary) &&
-                this.salaryHigher == that.salaryHigher &&
-                this.excessReportingLine == that.excessReportingLine;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeReport report = (EmployeeReport) o;
+        return employeeSalary == report.employeeSalary && Double.compare(normalSalary, report.normalSalary) == 0 && salaryHigher == report.salaryHigher && excessReportingLine == report.excessReportingLine && Objects.equals(employeeId, report.employeeId) && Objects.equals(employeeFirstName, report.employeeFirstName) && Objects.equals(employeeLastName, report.employeeLastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employee, normalSalary, salaryHigher, excessReportingLine);
+        return Objects.hash(employeeId, employeeFirstName, employeeLastName, employeeSalary, normalSalary, salaryHigher, excessReportingLine);
     }
 
     @Override
     public String toString() {
-        return "EmployeeReport[" +
-                "employee=" + employee + ", " +
-                "normalSalary=" + normalSalary + ", " +
-                "salaryHigher=" + salaryHigher + ", " +
-                "excessReportingLine=" + excessReportingLine + ']';
+        return "EmployeeReport{" +
+                "employeeId='" + employeeId + '\'' +
+                ", employeeFirstName='" + employeeFirstName + '\'' +
+                ", employeeLastName='" + employeeLastName + '\'' +
+                ", employeeSalary=" + employeeSalary +
+                ", normalSalary=" + normalSalary +
+                ", salaryHigher=" + salaryHigher +
+                ", excessReportingLine=" + excessReportingLine +
+                '}';
     }
-
 }

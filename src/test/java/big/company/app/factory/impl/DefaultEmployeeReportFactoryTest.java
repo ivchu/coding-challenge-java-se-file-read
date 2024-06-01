@@ -25,8 +25,8 @@ public class DefaultEmployeeReportFactoryTest {
 
         EmployeeReport report = defaultEmployeeReportFactory.createEmployeeReport(employee, salaryHigher, average, hierarchyLevel);
 
-        Assertions.assertEquals(employee, report.getEmployee());
-        Assertions.assertEquals(salaryHigher, report.getSalaryHigher());
+        Assertions.assertEquals(employee.getId(), report.getEmployeeId());
+        Assertions.assertEquals(salaryHigher, report.isSalaryHigher());
         Assertions.assertEquals(average, report.getNormalSalary());
         Assertions.assertEquals(hierarchyLevel, report.getExcessReportingLine());
     }

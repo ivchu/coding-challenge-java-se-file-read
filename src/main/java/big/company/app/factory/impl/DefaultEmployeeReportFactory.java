@@ -8,7 +8,13 @@ public class DefaultEmployeeReportFactory implements EmployeeReportFactory {
 
     @Override
     public EmployeeReport createEmployeeReport(Employee employee, boolean salaryHigher, double average, int hierarchyLevel) {
-        return new EmployeeReport(employee, average, salaryHigher, hierarchyLevel);
+        return new EmployeeReport(employee.getId(),
+                employee.getFirstName(),
+                employee.getLastName(),
+                employee.getSalary(),
+                average,
+                salaryHigher,
+                hierarchyLevel);
     }
 
 }

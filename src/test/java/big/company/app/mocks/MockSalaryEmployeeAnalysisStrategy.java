@@ -12,9 +12,11 @@ public class MockSalaryEmployeeAnalysisStrategy implements EmployeeAnalysisStrat
     @Override
     public Optional<EmployeeReport> analyzeEmployee(Employee employee, Map<String, Employee> employeeMap) {
         if (employee.getSalary() > 5000) {
-            return Optional.of(new EmployeeReport(employee, 4000, true, 0));
+            return Optional.of(new EmployeeReport(employee.getId(), employee.getFirstName(),
+                    employee.getLastName(), employee.getSalary(), 4000, true, 0));
         }
-        return Optional.of(new EmployeeReport(employee, 6000, false, 0));
+        return Optional.of(new EmployeeReport(employee.getId(), employee.getFirstName(),
+                employee.getLastName(), employee.getSalary(), 6000, false, 0));
     }
 
 }

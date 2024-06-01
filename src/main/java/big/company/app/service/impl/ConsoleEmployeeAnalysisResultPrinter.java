@@ -33,10 +33,10 @@ public class ConsoleEmployeeAnalysisResultPrinter implements EmployeeAnalysisRes
                 System.lineSeparator());
 
         employeeReports.forEach(report -> System.out.printf("%s %s with id %s earns more than required by %.2f%s",
-                report.getEmployee().getFirstName(),
-                report.getEmployee().getLastName(),
-                report.getEmployee().getId(),
-                Math.abs(report.getEmployee().getSalary() - report.getNormalSalary()),
+                report.getEmployeeFirstName(),
+                report.getEmployeeLastName(),
+                report.getEmployeeId(),
+                Math.abs(report.getEmployeeSalary() - report.getNormalSalary()),
                 System.lineSeparator()));
         log.log(Level.CONFIG, "Higher Salary employeeReports are printed");
     }
@@ -48,10 +48,10 @@ public class ConsoleEmployeeAnalysisResultPrinter implements EmployeeAnalysisRes
                 employeeReports.size(),
                 System.lineSeparator());
         employeeReports.forEach(report -> System.out.printf("%s %s with id %s earns less than required by %.2f%s",
-                report.getEmployee().getFirstName(),
-                report.getEmployee().getLastName(),
-                report.getEmployee().getId(),
-                Math.abs(report.getEmployee().getSalary() - report.getNormalSalary()),
+                report.getEmployeeFirstName(),
+                report.getEmployeeLastName(),
+                report.getEmployeeId(),
+                Math.abs(report.getEmployeeSalary() - report.getNormalSalary()),
                 System.lineSeparator()));
         log.log(Level.CONFIG, "Lower Salary employeeReports are printed");
     }
@@ -66,16 +66,16 @@ public class ConsoleEmployeeAnalysisResultPrinter implements EmployeeAnalysisRes
         employeeReports.forEach(report -> {
             if (report.getExcessReportingLine() != -1) {
                 System.out.printf("%s %s with id %s has more levels than required, excess levels amount is %d%s",
-                        report.getEmployee().getFirstName(),
-                        report.getEmployee().getLastName(),
-                        report.getEmployee().getId(),
+                        report.getEmployeeFirstName(),
+                        report.getEmployeeLastName(),
+                        report.getEmployeeId(),
                         report.getExcessReportingLine(),
                         System.lineSeparator());
             } else {
                 System.out.printf("%s %s with id %s has broken manager hierarchy, some manager presented more then once%s",
-                        report.getEmployee().getFirstName(),
-                        report.getEmployee().getLastName(),
-                        report.getEmployee().getId(),
+                        report.getEmployeeFirstName(),
+                        report.getEmployeeLastName(),
+                        report.getEmployeeId(),
                         System.lineSeparator());
             }
         });

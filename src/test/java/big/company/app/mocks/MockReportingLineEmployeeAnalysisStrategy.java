@@ -11,7 +11,8 @@ public class MockReportingLineEmployeeAnalysisStrategy implements EmployeeAnalys
 
     @Override
     public Optional<EmployeeReport> analyzeEmployee(Employee employee, Map<String, Employee> employeeMap) {
-        return Optional.of(new EmployeeReport(employee, 6000, false, 5));
+        return Optional.of(new EmployeeReport(employee.getId(), employee.getFirstName(),
+                employee.getLastName(), employee.getSalary(), 6000, false, 5));
     }
 
 }
