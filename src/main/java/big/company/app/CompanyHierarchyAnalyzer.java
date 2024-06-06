@@ -19,12 +19,12 @@ import java.util.logging.Logger;
 
 public class CompanyHierarchyAnalyzer {
     private static final Logger log = Logger.getLogger("big.company.app.CompanyHierarchyAnalyzer");
-    public static EmployeeFileReader employeeFileReader = new CsvEmployeeFileReader();
-    public static CompanyStructureAnalyzer companyStructureAnalyzer = new DefaultCompanyStructureAnalyzer(
+    private static final EmployeeFileReader employeeFileReader = new CsvEmployeeFileReader();
+    private static final CompanyStructureAnalyzer companyStructureAnalyzer = new DefaultCompanyStructureAnalyzer(
             new ReportingLineEmployeeAnalysisStrategy(new DefaultEmployeeReportFactory()),
             new SalaryEmployeeAnalysisStrategy(new DefaultEmployeeReportFactory())
     );
-    public static ConsoleEmployeeAnalysisResultPrinter consoleEmployeeAnalysisResultPrinter =
+    private static final ConsoleEmployeeAnalysisResultPrinter consoleEmployeeAnalysisResultPrinter =
             new ConsoleEmployeeAnalysisResultPrinter();
 
     public static void main(String[] args) {

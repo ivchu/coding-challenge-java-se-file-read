@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CsvEmployeeFileReader implements EmployeeFileReader {
-    public static final int FIRST_LINE = 1;
-    public static final String COMMA_DELIMITER = ",";
-    public static final int LINE_WITHOUT_MANAGER_ID_SIZE = 4;
+    private static final int FIRST_LINE = 1;
+    private static final String COMMA_DELIMITER = ",";
+    private static final int LINE_WITHOUT_MANAGER_ID_SIZE = 4;
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
     @Override

@@ -12,7 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ReportingLineEmployeeAnalysisStrategy implements EmployeeAnalysisStrategy {
-    public static final int MAXIMUM_MANAGERS_TO_CEO = 4;
+    private static final int MAXIMUM_MANAGERS_TO_CEO = 4;
+    private static final int INITIAL_LEVELS_SIZE = 0;
+    private static final int CIRCULAR_DEPENDENCY = -1;
     private final DefaultEmployeeReportFactory employeeReportFactory;
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
@@ -26,13 +28,13 @@ public class ReportingLineEmployeeAnalysisStrategy implements EmployeeAnalysisSt
             log.log(Level.CONFIG, "missing parameters for analyze method");
             return Optional.empty();
         }
-        int levels = 0;
+        int levels = INITIAL_LEVELS_SIZE;
         String managerId = employee.getManagerId();
         HashSet<String> visitedManagers = new HashSet<>();
 
         while (managerId != null) {
             if (visitedManagers.contains(managerId)) {
-                levels = -1;
+                levels = CIRCULAR_DEPENDENCY;
                 log.log(Level.CONFIG, "company structure has loops in structure for employee " + employee.getId());
                 break;
             }
@@ -45,7 +47,7 @@ public class ReportingLineEmployeeAnalysisStrategy implements EmployeeAnalysisSt
         if (levels > MAXIMUM_MANAGERS_TO_CEO) {
             return Optional.of(employeeReportFactory
                     .createEmployeeReport(employee, false, 0, levels - MAXIMUM_MANAGERS_TO_CEO));
-        } else if (levels == -1) {
+        } else if (levels == CIRCULAR_DEPENDENCY) {
             return Optional.of(employeeReportFactory.createEmployeeReport(employee, false, 0, -1));
         } else {
             return Optional.empty();
